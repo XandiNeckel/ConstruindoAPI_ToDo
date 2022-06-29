@@ -7,11 +7,13 @@ class UsuarioDao{
         return new  Promise(function(resolve,reject){
             this.bd.all(`SELECT * FROM USUARIOS`, (error, resultado)=>{
                 if(error){
-                    res.send('Erro ao selecionar banco')
+                    reject('Erro ao selecionar banco')
                 }else{
-                    res.send(resultado);
+                    resolve(resultado);
                 }
             })
         })
     }
 }
+
+export default UsuarioDao;

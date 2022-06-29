@@ -15,5 +15,4 @@ const usuario1 = (app) => { //SELECIONANDO O BANCO NO SQLite
     })
 } // FINAL DO COD PARA SELECIONAR O BANCO
 
-module.exports = bd;
-// export{bd}
+export default bd;

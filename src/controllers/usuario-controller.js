@@ -1,25 +1,16 @@
 import bd from '../infra/bd.js';
-import usuario from '../models/usuario-models.js';
-const UsuarioDao = require('./DAO/aluno_dao.js');
-
-const DadosDAO = new UsuarioDao (bdSQLite)
+import Usuario from '../models/usuario-models.js';
+import UsuarioDao from '../DAO/Usuario_dao.js';
 
 function usuario1(app, bdSQLite) {
     const DadosDAO = new UsuarioDao(bdSQLite);
-    app.get('/src/controllers/usuario-controller.js', (req, res) => {
+    app.get('/usuario', (req, res) => {
         DadosDAO.listarUsuario()
-            .then.status(200)((resultado) => res.send(resultado))
-            .trycatch((err) => res.send(err));
+            .then((resultado) => res.send(resultado))
+            .catch((err) => res.send(err));
     });
 
 
-    const usuario1 = (app) =>{
-        app.get('/src/controllers/usuario-controller.js', (req, res) => {
-            res.send({
-                'rota usuario': bd.usuario
-            });
-        });
-    }
     app.post('/usuario', (req, res) => {
         const NovoUsuario = new usuario(req.body.nome, req.body.email, req.body.senha);
 
@@ -31,7 +22,7 @@ function usuario1(app, bdSQLite) {
             });
     });
 
-    app.get('/src/controllers/usuario-controller.js:email', (req, res) => {
+    app.get('/usuario/:email', (req, res) => {
         for (let i = 0; i < bd.usuario.length; i++) {
             if (req.params.email == bd.usuario[i].email) {
                 res.send(bd.usuario[i]);
@@ -39,7 +30,7 @@ function usuario1(app, bdSQLite) {
         }
     });
 
-    app.put('/src/controllers/usuario-controller.js:nome', (req, res) => {
+    app.put('/usuario/:nome', (req, res) => {
         const nome = req.params.nome;
         const body = req.body;
 
@@ -62,7 +53,7 @@ function usuario1(app, bdSQLite) {
         }
     });
 
-    app.delet('/src/controllers/usuario-controller.js:email', (req, res) => {
+    app.delete('/usuario/:email', (req, res) => {
         const nome = req.params.nome;
         const usuarioIndex = bd.usuario.findIndex(aluno => aluno.nome == nome);
 
@@ -77,3 +68,5 @@ function usuario1(app, bdSQLite) {
         }
     });
 }
+
+export default usuario1;

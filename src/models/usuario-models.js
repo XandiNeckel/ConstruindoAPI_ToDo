@@ -1,5 +1,5 @@
 let id = 0;
-export class usuario{
+ class Usuario{
     constructor(nome,email,senha) {
         this.id=id++;
         this.nome = nome,
@@ -14,3 +14,5 @@ export class usuario{
             throw new Error('Senha deve conter 8 ou mais caracteres')
         }
     }
+
+    export default Usuario;
