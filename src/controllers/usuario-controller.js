@@ -1,13 +1,20 @@
-import bd from '../infra/bd.js';
+import bdSQLite from '../infra/bd.js';
 import Usuario from '../models/usuario-models.js';
 import UsuarioDao from '../DAO/Usuario_dao.js';
 
-function usuario1(app, bdSQLite) {
-    const DadosDAO = new UsuarioDao(bdSQLite);
+
+    const DadosDAO = new UsuarioDAO(bdSQLite);
+
     app.get('/usuario', (req, res) => {
-        DadosDAO.listarUsuario()
-            .then((resultado) => res.send(resultado))
-            .catch((err) => res.send(err));
+        try{
+            const UsuarioDAO = await DadosDAO.UsuarioDAO();
+            res.status(200).json(UsuarioDAO);
+        }catch(error){
+            res.status(404).json({
+                message: error.message,
+                error: true,
+            });
+        }
     });
 
 
@@ -67,6 +74,6 @@ function usuario1(app, bdSQLite) {
             res.json('Usuario não encontrado');
         }
     });
-}
+
 
 export default usuario1;
